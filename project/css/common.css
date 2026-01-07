@@ -1,0 +1,101 @@
+/* css/common.css */
+:root{
+  --bg: #f7f2e8;      /* 宣纸感 */
+  --text: #1f1f1f;    /* 墨黑 */
+  --muted: #6b6b6b;
+  --accent: #b23a2f;  /* 朱砂 */
+  --card: #fffaf0;
+  --border: rgba(0,0,0,0.08);
+}
+
+* { box-sizing: border-box; }
+body{
+  margin: 0;
+  font-family: system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.container{
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.site-header{
+  position: sticky;
+  top: 0;
+  background: rgba(247,242,232,0.9);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--border);
+  z-index: 10;
+}
+
+.navbar{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+}
+
+.brand{
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.nav-links{
+  display: flex;
+  gap: 14px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-link{
+  text-decoration: none;
+  color: var(--text);
+  padding: 8px 10px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-link:hover{
+  background: rgba(0,0,0,0.05);
+}
+
+.nav-link.active{
+  color: var(--accent);
+  background: rgba(178,58,47,0.08);
+}
+
+.badge{
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: white;
+}
+
+.badge--empty{
+  opacity: 0.5;
+}
+
+.site-footer{
+  border-top: 1px solid var(--border);
+  margin-top: 40px;
+  padding: 18px 0;
+  color: var(--muted);
+}
+
+.footer-inner{
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.muted{ color: var(--muted); }
