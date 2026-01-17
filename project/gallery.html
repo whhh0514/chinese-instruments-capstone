@@ -1,25 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-   <!-- 在此输入页面标题 -->
-  <title>页面标题</title>
-
-  <!-- 先引入全站通用样式 -->
+  <title>乐器图鉴 - 听见古韵</title>
   <link rel="stylesheet" href="./css/common.css" />
-
-  <!-- 再引入本页自己的样式（可选） -->
   <link rel="stylesheet" href="./css/gallery.css" />
 </head>
-
 <body>
   <div id="site-header"></div>
 
   <main id="app" class="container">
-    <!-- 这个页面自己的内容放这里 -->
+    <!-- 筛选区域 -->
+    <section class="filters">
+      <h1 class="page-title">乐器图鉴</h1>
+      <div class="filter-group">
+        <div class="filter-item">
+          <label for="category-filter">分类筛选：</label>
+          <select id="category-filter" class="filter-select">
+            <option value="all">全部乐器</option>
+            <option value="吹">吹奏乐器</option>
+            <option value="拉">拉弦乐器</option>
+            <option value="弹">弹拨乐器</option>
+            <option value="打">打击乐器</option>
+          </select>
+        </div>
+        
+        <div class="filter-item">
+          <label for="dynasty-filter">朝代筛选：</label>
+          <select id="dynasty-filter" class="filter-select">
+            <option value="all">全部朝代</option>
+            <!-- 由JS动态填充 -->
+          </select>
+        </div>
+        
+        <div class="filter-item">
+          <label for="search-input">关键词搜索：</label>
+          <input type="text" id="search-input" class="search-input" placeholder="输入乐器名称或描述...">
+        </div>
+        
+        <button id="reset-filters" class="reset-btn">重置筛选</button>
+      </div>
+    </section>
+
+    <!-- 乐器列表容器 -->
+    <section class="gallery-content">
+      <div id="instrument-count" class="count-info">正在加载...</div>
+      <div id="instrument-grid" class="instrument-grid">
+        <!-- 由JS动态填充乐器卡片 -->
+      </div>
+    </section>
+
+    <!-- 空状态提示 -->
+    <div id="empty-state" class="empty-state hidden">
+      <div class="empty-icon">🎵</div>
+      <h3>暂无匹配的乐器</h3>
+      <p>请尝试调整筛选条件或搜索关键词</p>
+    </div>
   </main>
+
+  <!-- 详情弹窗 -->
+  <div id="detail-modal" class="modal hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modal-title">乐器详情</h2>
+        <button id="modal-close" class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-image">
+          <img id="modal-img" src="" alt="">
+        </div>
+        <div class="modal-info">
+          <div class="info-badges">
+            <span id="modal-category" class="category-badge">弹</span>
+            <span id="modal-dynasty" class="dynasty-badge">先秦</span>
+          </div>
+          <h3 id="modal-name" class="instrument-name">古琴</h3>
+          <p id="modal-desc" class="instrument-desc">乐器描述...</p>
+          <div class="modal-actions">
+            <button id="modal-audio-btn" class="audio-btn">试听音频</button>
+            <button id="modal-fav-btn" class="fav-btn">加入收藏</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-overlay"></div>
+  </div>
 
   <div id="site-footer"></div>
 
-  <script src="./js/common.js" defer></script>
-  <script src="./js/gallery.js" defer></script>
+  <script src="./js/data.js"></script>
+  <script src="./js/common.js"></script>
+  <script src="./js/gallery.js"></script>
 </body>
+</html>
