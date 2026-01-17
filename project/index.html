@@ -1,14 +1,19 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-   <!-- 在此输入页面标题 -->
-  <title>页面标题</title>
+  <!-- 在此输入页面标题 -->
+  <title>听见古韵：古代乐器图鉴</title>
 
   <!-- 先引入全站通用样式 -->
   <link rel="stylesheet" href="./css/common.css" />
 
   <!-- 再引入本页自己的样式（可选） -->
   <link rel="stylesheet" href="./css/index.css" />
+  
+  <!-- 字体图标 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
@@ -16,10 +21,89 @@
 
   <main id="app" class="container">
     <!-- 这个页面自己的内容放这里 -->
+    <!-- Hero 区域 -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <h1 class="hero-title">听见古韵</h1>
+        <p class="hero-subtitle">古代乐器图鉴</p>
+        <p class="hero-desc">
+          探索千年音乐文明，聆听华夏传统乐器的悠扬之声
+        </p>
+        <a href="gallery.html" class="hero-button">进入图鉴</a>
+      </div>
+    </section>
+
+    <!-- 分类入口区域 -->
+    <section class="category-section">
+      <div class="category-inner">
+        <h2 class="section-title">乐器分类</h2>
+        <p class="section-desc">按演奏方式分为四大类别</p>
+        <div class="category-grid">
+          <!-- 吹奏乐器 -->
+          <a href="gallery.html?cat=吹" class="category-card category-blow">
+            <div class="category-icon">
+              <i class="fas fa-wind"></i>
+            </div>
+            <h3 class="category-name">吹奏乐器</h3>
+            <p class="category-count" id="blow-count">0 件</p>
+          </a>
+
+          <!-- 拉弦乐器 -->
+          <a href="gallery.html?cat=拉" class="category-card category-pull">
+            <div class="category-icon">
+              <i class="fas fa-guitar"></i>
+            </div>
+            <h3 class="category-name">拉弦乐器</h3>
+            <p class="category-count" id="pull-count">0 件</p>
+          </a>
+
+          <!-- 弹拨乐器 -->
+          <a href="gallery.html?cat=弹" class="category-card category-pluck">
+            <div class="category-icon">
+              <i class="fas fa-music"></i>
+            </div>
+            <h3 class="category-name">弹拨乐器</h3>
+            <p class="category-count" id="pluck-count">0 件</p>
+          </a>
+
+          <!-- 打击乐器 -->
+          <a href="gallery.html?cat=打" class="category-card category-hit">
+            <div class="category-icon">
+              <i class="fas fa-drum"></i>
+            </div>
+            <h3 class="category-name">打击乐器</h3>
+            <p class="category-count" id="hit-count">0 件</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 今日推荐区域 -->
+    <section class="recommend-section">
+      <div class="recommend-inner">
+        <div class="recommend-header">
+          <h2 class="section-title">今日推荐</h2>
+          <button id="refresh-recommend" class="refresh-button" title="换一个推荐">
+            <i class="fas fa-redo-alt"></i>
+            换一个
+          </button>
+        </div>
+        
+        <div class="recommend-card" id="recommend-card">
+          <!-- 动态内容将由 JavaScript 填充 -->
+          <div class="recommend-loading">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>正在加载推荐乐器...</p>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <div id="site-footer"></div>
 
   <script src="./js/common.js" defer></script>
+  <script src="./js/data.js" defer></script>
   <script src="./js/index.js" defer></script>
 </body>
+</html>
