@@ -1,13 +1,17 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-   <!-- 在此输入页面标题 -->
-  <title>页面标题</title>
-
+  <title>听音测验 - 听见古韵</title>
+  
+  <!-- 引入Font Awesome图标 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
   <!-- 先引入全站通用样式 -->
   <link rel="stylesheet" href="./css/common.css" />
-
-  <!-- 再引入本页自己的样式（可选） -->
+  
+  <!-- 再引入本页自己的样式 -->
   <link rel="stylesheet" href="./css/quiz.css" />
 </head>
 
@@ -15,11 +19,80 @@
   <div id="site-header"></div>
 
   <main id="app" class="container">
-    <!-- 这个页面自己的内容放这里 -->
+    <!-- 测验主容器 -->
+    <div class="quiz-container" id="quizContainer">
+      
+      <!-- 开始界面 -->
+      <div class="quiz-start" id="quizStart">
+        <div class="start-content">
+          <h1 class="quiz-title">听音猜乐器</h1>
+          <p class="quiz-desc">聆听千年古韵，测试你对古代乐器的了解程度</p>
+          <div class="quiz-rules">
+            <p>📌 共5道题目</p>
+            <p>🎵 每题播放一段乐器音频</p>
+            <p>🎯 从3个选项中选择正确答案</p>
+          </div>
+          <button class="start-btn" id="startBtn">开始测验</button>
+        </div>
+      </div>
+
+      <!-- 答题界面 -->
+      <div class="quiz-question hidden" id="quizQuestion">
+        <!-- 进度条 -->
+        <div class="quiz-progress">
+          <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+          <span class="progress-text" id="progressText">第 1 / 5 题</span>
+        </div>
+
+        <!-- 题目区域 -->
+        <div class="question-area">
+          <h2 class="question-title">请聆听这段音频，选择对应的乐器</h2>
+          <div class="audio-player">
+            <button class="play-audio-btn" id="playAudioBtn">
+              <i class="fas fa-play"></i> 播放音频
+            </button>
+            <audio id="questionAudio" preload="auto"></audio>
+          </div>
+        </div>
+
+        <!-- 选项区域 -->
+        <div class="options-area" id="optionsArea">
+          <!-- 动态生成选项 -->
+        </div>
+
+        <!-- 反馈区域 -->
+        <div class="feedback-area hidden" id="feedbackArea">
+          <div class="feedback-content">
+            <p class="feedback-text" id="feedbackText"></p>
+            <button class="next-btn" id="nextBtn">下一题</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 结果界面 -->
+      <div class="quiz-result hidden" id="quizResult">
+        <div class="result-content">
+          <div class="result-icon">🎉</div>
+          <h2 class="result-title">测验完成！</h2>
+          <p class="result-score" id="resultScore">得分：0 / 5</p>
+          <p class="result-desc" id="resultDesc"></p>
+          <button class="restart-btn" id="restartBtn">再来一次</button>
+        </div>
+      </div>
+    </div>
   </main>
 
   <div id="site-footer"></div>
 
+  <!-- 通用脚本 -->
   <script src="./js/common.js" defer></script>
+  
+  <!-- 乐器数据 -->
+  <script src="./js/data.js" defer></script>
+  
+  <!-- 测验核心逻辑 -->
   <script src="./js/quiz.js" defer></script>
 </body>
+</html>
