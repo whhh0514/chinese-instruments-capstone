@@ -94,28 +94,44 @@
     const favIds = window.getFavIds ? window.getFavIds() : []
     const isFavorited = favIds.includes(instrument.id)
     
-    // 生成推荐卡片HTML（使用与gallery.js相同的占位图）
-    const recommendHtml = `
-      <div class="recommend-content">
-        <img src="${instrument.img}" alt="${instrument.name}" class="recommend-img" onerror="this.src='./assets/img/placeholder.jpg'">
-        <div class="recommend-info">
-          <h3 class="recommend-name">${instrument.name}</h3>
-          <span class="recommend-category">${getCategoryName(instrument.category)}</span>
-          <p class="recommend-dynasty">${instrument.dynasty}</p>
-          <p class="recommend-desc">${instrument.desc.substring(0, 100)}...</p>
-          <div class="recommend-actions">
-            <button class="recommend-button button-detail" onclick="window.showInstrumentDetail(${instrument.id})">查看详情</button>
-            <button class="recommend-button button-listen" onclick="window.playInstrumentAudio('${instrument.audio}', '${instrument.name}', this)">试听音频</button>
-            <button class="recommend-button button-favorite ${isFavorited ? 'active' : ''}" 
-                    onclick="window.toggleFavorite(${instrument.id}, this)">
-              ${isFavorited ? '已收藏' : '收藏'}
-            </button>
-          </div>
-        </div>
-      </div>
-    `
+    // 移除占位符，插入真实图片
+    const imgWrapper = document.querySelector('.recommend-img-wrapper')
+    if (imgWrapper) {
+      imgWrapper.innerHTML = `
+        <img src="${instrument.img}" alt="${instrument.name}" 
+             class="recommend-img" 
+             onerror="this.onerror=null; this.src='./assets/img/placeholder.jpg'; this.classList.add('error')">
+      `
+      
+      // 图片加载完成后添加loaded类
+      const img = imgWrapper.querySelector('.recommend-img')
+      if (img.complete) {
+        img.classList.add('loaded')
+      } else {
+        img.addEventListener('load', function() {
+          this.classList.add('loaded')
+        })
+      }
+    }
     
-    recommendCard.innerHTML = recommendHtml
+    // 更新推荐信息
+    const recommendInfo = document.querySelector('.recommend-info')
+    if (recommendInfo) {
+      recommendInfo.innerHTML = `
+        <h3 class="recommend-name">${instrument.name}</h3>
+        <span class="recommend-category">${getCategoryName(instrument.category)}</span>
+        <p class="recommend-dynasty">${instrument.dynasty}</p>
+        <p class="recommend-desc">${instrument.desc.substring(0, 100)}...</p>
+        <div class="recommend-actions">
+          <button class="recommend-button button-detail" onclick="window.showInstrumentDetail(${instrument.id})">查看详情</button>
+          <button class="recommend-button button-listen" onclick="window.playInstrumentAudio('${instrument.audio}', '${instrument.name}', this)">试听音频</button>
+          <button class="recommend-button button-favorite ${isFavorited ? 'active' : ''}" 
+                  onclick="window.toggleFavorite(${instrument.id}, this)">
+            ${isFavorited ? '已收藏' : '收藏'}
+          </button>
+        </div>
+      `
+    }
   }
 
   /**
