@@ -151,7 +151,7 @@
   border-color: var(--accent)
 }
 
-/* 不同分类的颜色主题 */
+/* 分类图标样式 - 保持原样 */
 .category-blow .category-icon {
   background-color: #4caf50
   color: white
@@ -246,7 +246,7 @@
   display: flex
   flex-direction: column
   align-items: center
-  padding: 40px
+  padding: 0
   text-align: center
 }
 
@@ -257,25 +257,57 @@
   }
 }
 
-.recommend-img {
-  width: 180px
-  height: 180px
-  object-fit: cover
-  border-radius: 12px
-  margin-bottom: 25px
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1)
-  border: 1px solid var(--border)
+/* ====== 统一的图片样式 ====== */
+
+/* 图片容器 */
+.recommend-img-wrapper {
+  width: 100%
+  position: relative
+  overflow: hidden
 }
 
-@media (min-width: 768px) {
-  .recommend-img {
-    margin-right: 40px
-    margin-bottom: 0
-  }
+/* 乐器图片样式 - 与gallery.css保持一致 */
+.recommend-img {
+  width: 100%
+  height: 200px /* 固定高度，避免闪烁 */
+  object-fit: cover /* 保持比例裁剪 */
+  object-position: center /* 居中显示 */
+  background: linear-gradient(135deg, #f8f4e9 0%, #f1ebe0 100%) /* 宣纸底色 */
+  display: block
+  transition: all 0.3s ease
+}
+
+/* 图片占位符 */
+.recommend-img-placeholder {
+  width: 100%
+  height: 200px
+  background: linear-gradient(135deg, #f8f4e9 0%, #f1ebe0 100%)
+  display: flex
+  align-items: center
+  justify-content: center
+  color: var(--muted)
+}
+
+/* 图片加载状态 */
+.recommend-img.loading {
+  background: #f5f5f5 url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23f5f5f5"/><text x="50" y="50" font-family="Arial" font-size="10" text-anchor="middle" fill="%23666">加载中...</text></svg>') center/50px no-repeat
+}
+
+/* 图片加载失败时的占位图 */
+.recommend-img.error {
+  background: #e8e8e8 url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23e8e8e8"/><text x="50" y="50" font-family="Arial" font-size="8" text-anchor="middle" fill="%23999">图片加载失败</text></svg>') center/30px no-repeat
+  border: 1px dashed #ccc
+}
+
+/* 图片悬停效果 */
+.recommend-card:hover .recommend-img {
+  transform: scale(1.02)
+  box-shadow: 0 4px 12px rgba(178, 58, 47, 0.2) /* 朱砂色阴影 */
 }
 
 .recommend-info {
   flex: 1
+  padding: 40px
 }
 
 .recommend-name {
@@ -318,6 +350,16 @@
   .recommend-actions {
     justify-content: flex-start
   }
+  
+  /* 在大屏幕下调整图片容器大小 */
+  .recommend-img-wrapper {
+    width: 40%
+    min-width: 300px
+  }
+  
+  .recommend-img {
+    height: 300px /* 大屏幕下更高 */
+  }
 }
 
 .recommend-button {
@@ -348,6 +390,17 @@
   background-color: rgba(178, 58, 47, 0.9)
 }
 
+.button-favorite {
+  background-color: var(--muted)
+  color: white
+  border-color: var(--muted)
+}
+
+.button-favorite.active {
+  background-color: var(--accent)
+  border-color: var(--accent)
+}
+
 .recommend-loading {
   display: flex
   flex-direction: column
@@ -363,7 +416,9 @@
   color: var(--accent)
 }
 
-/* 响应式设计 */
+/* ===== 响应式图片规范 ===== */
+
+/* 小屏幕适配 */
 @media (max-width: 768px) {
   .hero-title {
     font-size: 2.5rem
@@ -389,6 +444,15 @@
     margin: 20px 0 40px
     padding: 30px 15px
   }
+  
+  /* 移动端图片高度 */
+  .recommend-img {
+    height: 160px
+  }
+  
+  .recommend-img-placeholder {
+    height: 160px
+  }
 }
 
 @media (max-width: 480px) {
@@ -412,7 +476,24 @@
     width: 100%
   }
   
-  .recommend-content {
+  .recommend-info {
     padding: 30px 20px
   }
+}
+
+/* 大屏幕优化 */
+@media (min-width: 1200px) {
+  .recommend-img {
+    height: 350px /* 超大屏幕下更高 */
+  }
+}
+
+/* ===== 图片懒加载优化 ===== */
+.recommend-img[data-src] {
+  opacity: 0
+  transition: opacity 0.3s ease
+}
+
+.recommend-img.loaded {
+  opacity: 1
 }
