@@ -1,170 +1,115 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>听见古韵：古代乐器图鉴 - 首页</title>
-    
-    <!-- 样式 -->
-    <link rel="stylesheet" href="css/common.css">
-    <link rel="stylesheet" href="css/index.css">
-    
-    <!-- 图标 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>听见古韵：古代乐器图鉴</title>
+
+  <!-- 先引入全站通用样式 -->
+  <link rel="stylesheet" href="./css/common.css" />
+
+  <!-- 再引入本页自己的样式 -->
+  <link rel="stylesheet" href="./css/index.css" />
+  
+  <!-- 字体图标 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
-    <!-- 导航栏（由common.js动态生成） -->
-    <header id="main-header"></header>
+  <div id="site-header"></div>
 
-    <!-- 主内容区 -->
-    <main class="main-content">
-        <!-- Hero区 -->
-        <section class="hero-section">
-            <div class="hero-container">
-                <div class="hero-content">
-                    <h1 class="main-title">听见古韵</h1>
-                    <p class="subtitle">古代乐器数字图鉴</p>
-                    
-                    <p class="hero-description">
-                        探索<span class="highlight">「吹、拉、弹、打」</span>四大类古代乐器<br>
-                        以数字化的方式重现千年音律，触摸历史脉搏
-                    </p>
-                    
-                    <div class="hero-buttons">
-                        <button class="btn btn-primary" id="exploreBtn">
-                            <i class="fas fa-compass"></i>
-                            <span>开始探索</span>
-                        </button>
-                        <button class="btn btn-outline" id="listenBtn">
-                            <i class="fas fa-music"></i>
-                            <span>试听示例</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </section>
+  <main id="app" class="container">
+    <!-- Hero 区域 -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <h1 class="hero-title">听见古韵</h1>
+        <p class="hero-subtitle">古代乐器图鉴</p>
+        <p class="hero-desc">
+          探索千年音乐文明，聆听华夏传统乐器的悠扬之声
+        </p>
+        <a href="gallery.html" class="hero-button">进入图鉴</a>
+      </div>
+    </section>
 
-        <!-- 分类导航 -->
-        <section class="categories-section" id="categories">
-            <div class="section-header">
-                <h2 class="section-title">乐器分类</h2>
-                <p class="section-description">按传统演奏方式分为四大类</p>
+    <!-- 分类入口区域 -->
+    <section class="category-section">
+      <div class="category-inner">
+        <h2 class="section-title">乐器分类</h2>
+        <p class="section-desc">按演奏方式分为四大类别</p>
+        <div class="category-grid">
+          <!-- 吹奏乐器 -->
+          <a href="gallery.html?cat=吹" class="category-card category-blow">
+            <div class="category-icon">
+              <i class="fas fa-wind"></i>
             </div>
-            
-            <div class="categories-grid">
-                <!-- 分类卡片将由JavaScript动态生成 -->
-            </div>
-        </section>
+            <h3 class="category-name">吹奏乐器</h3>
+            <p class="category-count" id="blow-count">0 件</p>
+          </a>
 
-        <!-- 今日推荐 -->
-        <section class="recommendation-section">
-            <div class="section-header">
-                <h2 class="section-title">今日推荐</h2>
-                <p class="section-description">精选一款经典乐器</p>
+          <!-- 拉弦乐器 -->
+          <a href="gallery.html?cat=拉" class="category-card category-pull">
+            <div class="category-icon">
+              <i class="fas fa-guitar"></i>
             </div>
-            
-            <div class="recommendation-container">
-                <div class="recommendation-card">
-                    <div class="rec-image-container">
-                        <img id="recImage" src="" alt="乐器图片" class="rec-image">
-                        <div class="rec-badge">
-                            <i class="fas fa-star"></i>
-                            <span>今日推荐</span>
-                        </div>
-                    </div>
-                    
-                    <div class="rec-content">
-                        <div class="rec-header">
-                            <h3 id="recName">加载中...</h3>
-                            <div class="rec-tags">
-                                <span class="tag-category" id="recCategory">分类</span>
-                                <span class="tag-dynasty" id="recDynasty">朝代</span>
-                            </div>
-                        </div>
-                        
-                        <div class="rec-body">
-                            <p id="recDescription">加载描述...</p>
-                        </div>
-                        
-                        <div class="rec-controls">
-                            <button class="btn btn-play" id="playBtn">
-                                <i class="fas fa-play" id="playIcon"></i>
-                                <span id="playText">试听音色</span>
-                            </button>
-                            
-                            <button class="btn btn-detail" id="detailBtn">
-                                <i class="fas fa-info-circle"></i>
-                                <span>详情介绍</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="rec-nav">
-                    <button class="btn btn-nav" id="prevBtn">
-                        <i class="fas fa-chevron-left"></i>
-                        <span>上一个</span>
-                    </button>
-                    
-                    <div class="nav-dots" id="navDots">
-                        <!-- 导航点将由JavaScript动态生成 -->
-                    </div>
-                    
-                    <button class="btn btn-nav" id="nextBtn">
-                        <span>下一个</span>
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
-                </div>
+            <h3 class="category-name">拉弦乐器</h3>
+            <p class="category-count" id="pull-count">0 件</p>
+          </a>
+
+          <!-- 弹拨乐器 -->
+          <a href="gallery.html?cat=弹" class="category-card category-pluck">
+            <div class="category-icon">
+              <i class="fas fa-music"></i>
             </div>
-        </section>
+            <h3 class="category-name">弹拨乐器</h3>
+            <p class="category-count" id="pluck-count">0 件</p>
+          </a>
 
-        <!-- 功能入口 -->
-        <section class="features-section">
-            <div class="section-header">
-                <h2 class="section-title">特色功能</h2>
+          <!-- 打击乐器 -->
+          <a href="gallery.html?cat=打" class="category-card category-hit">
+            <div class="category-icon">
+              <i class="fas fa-drum"></i>
             </div>
-            
-            <div class="features-grid">
-                <a href="gallery.html" class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-images"></i>
-                    </div>
-                    <h3>乐器图鉴</h3>
-                    <p>详细收录四大类古代乐器</p>
-                </a>
-                
-                <a href="favorites.html" class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-heart"></i>
-                    </div>
-                    <h3>我的收藏</h3>
-                    <p>收藏喜爱的乐器</p>
-                </a>
-                
-                <a href="quiz.html" class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-gamepad"></i>
-                    </div>
-                    <h3>听音测验</h3>
-                    <p>测试你的辨音能力</p>
-                </a>
+            <h3 class="category-name">打击乐器</h3>
+            <p class="category-count" id="hit-count">0 件</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 今日推荐区域 -->
+    <section class="recommend-section">
+      <div class="recommend-inner">
+        <div class="recommend-header">
+          <h2 class="section-title">今日推荐</h2>
+          <button id="refresh-recommend" class="refresh-button" title="换一个推荐">
+            <i class="fas fa-redo-alt"></i>
+            换一个
+          </button>
+        </div>
+        
+        <div class="recommend-card" id="recommend-card">
+          <div class="recommend-content">
+            <div class="recommend-img-wrapper">
+              <div class="recommend-img-placeholder">
+                <i class="fas fa-spinner fa-spin"></i>
+              </div>
             </div>
-        </section>
-    </main>
+            <div class="recommend-info">
+              <div class="recommend-loading">
+                <i class="fas fa-music"></i>
+                <p>正在加载推荐乐器...</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 
-    <!-- 页脚（由common.js动态生成） -->
-    <footer id="main-footer"></footer>
+  <div id="site-footer"></div>
 
-    <!-- 音频元素 -->
-    <audio id="audioPlayer" preload="metadata">
-        <source src="" type="audio/mpeg">
-        您的浏览器不支持音频播放。
-    </audio>
-
-    <!-- 脚本 -->
-    <script src="js/data.js"></script>
-    <script src="js/common.js"></script>
-    <script src="js/index.js"></script>
+  <script src="./js/common.js" defer></script>
+  <script src="./js/data.js" defer></script>
+  <script src="./js/index.js" defer></script>
 </body>
 </html>
